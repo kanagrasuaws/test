@@ -16,6 +16,7 @@ resource "aws_instance" "kubectl-server" {
   associate_public_ip_address = true
   subnet_id                   = aws_subnet.public-1.id
   vpc_security_group_ids      = [aws_security_group.allow_tls.id]
+  user_data                   = file("jenkins-script.sh")
 
   tags = {
     Name = "kubectl"
