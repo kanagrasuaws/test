@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:latest
+        image: kanagarasu/apach:24
         ports:
         - containerPort: 80
