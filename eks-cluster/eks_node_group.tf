@@ -7,23 +7,6 @@ data "aws_ami" "myec2" {
   }
 }
 
-
-
-resource "aws_instance" "kubectl-server" {
-  ami                         = data.aws_ami.myec2.id
-  key_name                    = "key1"
-  instance_type               = "t2.micro"
-  associate_public_ip_address = true
-  subnet_id                   = aws_subnet.public-1.id
-  vpc_security_group_ids      = [aws_security_group.allow_tls.id]
-  user_data                   = file("jenkins-script.sh")
-
-  tags = {
-    Name = "kubectl"
-  }
-
-}
-
 resource "aws_eks_node_group" "node-grp" {
   cluster_name    = aws_eks_cluster.eks.name
   node_group_name = "pc-node-group"
