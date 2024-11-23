@@ -22,7 +22,7 @@ pipeline {
 stage("Deploy to EKS") {
             steps {
                 script {
-                    dir('Kubernetes') {
+                    dir('kubernetes') {
                         sh "aws eks update-kubeconfig --name eks-cluster --region ap-south-1"
                         sh "cat /var/lib/jenkins/.kube/config"
                         sh "kubectl apply -f nginx-deployment.yaml -n default"
