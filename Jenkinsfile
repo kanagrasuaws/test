@@ -18,3 +18,18 @@ pipeline {
         }
 }
 }
+
+stage("Deploy to EKS") {
+            steps {
+                script {
+                    dir('Kubernetes') {
+                        sh "aws eks update-kubeconfig --name eks-cluster --region ap-south-1"
+                        sh "cat /var/lib/jenkins/.kube/config"
+                        sh "kubectl apply -f nginx-deployment.yaml -n default"
+                        sh "kubectl apply -f nginx-service.yaml -n default"
+                    }
+                }
+            }
+        }
+    }
+}
